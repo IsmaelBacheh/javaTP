@@ -10,9 +10,7 @@ import modele.CalendrierDuMois;
 import modele.ConstantesCalendrier;
 import modele.DateCalendrier;
 
-import java.util.List;
-
-public class VBoxRoot extends VBox {
+public class VBoxCalendrier extends VBox {
     StackPane monthsStackPane = new StackPane();
     Button precedentMoisButton = new Button("<");
     Button suivantMoisButton = new Button(">");
@@ -22,7 +20,7 @@ public class VBoxRoot extends VBox {
     int annee;
     int moisCourant;
 
-    public VBoxRoot(){
+    public VBoxCalendrier(){
         DateCalendrier aujourdhui = new DateCalendrier();
         int mois = aujourdhui.getMois();
         annee = aujourdhui.getAnnee();
