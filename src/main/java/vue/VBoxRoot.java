@@ -5,10 +5,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.TilePane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import modele.CalendrierDuMois;
 import modele.ConstantesCalendrier;
 import modele.DateCalendrier;
@@ -78,15 +75,12 @@ public class VBoxRoot extends VBox {
                 tilePane.getChildren().add(dayLabel);
             }
 
-            VBox boxDates = new VBox();
-            ScrollPane scrollPaneDates = new ScrollPane();
-            scrollPaneDates.setContent(boxDates);
-            VBox.setMargin(scrollPaneDates, new Insets(4));
            // this.getChildren().add(scrollPaneDates);
             for(DateCalendrier date : monthCalendrier.getDates()) {
                 //
                 ToggleButton dateButton = new ToggleButton(Integer.toString(date.getJour()));
 
+                dateButton.setPadding(new Insets(10));
                 dateButton.setToggleGroup(buttonGroup);
                 tilePane.getChildren().add(dateButton);
 
@@ -98,24 +92,28 @@ public class VBoxRoot extends VBox {
                     }
                 });
 
-                Label dateLabel = new Label(date.toString());
-                VBox.setMargin(dateLabel, new Insets(8));
-                boxDates.getChildren().add(dateLabel);
-                if (date.getMois() != mois) {
-                    dateLabel.setId("dateOutOfMonth");
+                if (date.getMois() != monthIndex) {
+                    dateButton.setId("dateOutOfMonth");
                 }
                 if (date.compareTo(aujourdhui) == 0) {
-                    dateLabel.setId("today");
+                    dateButton.setId("today");
                 }
             }
-            monthsStackPane.getChildren().add(scrollPaneDates);
-            scrollPaneDates.setAccessibleText(ConstantesCalendrier.Mois.values()[monthIndex-1].toString());
+            tilePane.setAccessibleText(ConstantesCalendrier.Mois.values()[monthIndex - 1].toString());
+            monthsStackPane.getChildren().add(tilePane);
         }
-        this.getChildren().add(monthsStackPane);
+
+        VBox vboxCalendrier = new VBox();
+        vboxCalendrier.setFillWidth(false);
+        vboxCalendrier.getChildren().add(monthsStackPane);
+
+        Region spacer = new Region();
+        HBox.setHgrow(spacer, Priority.ALWAYS);
+        hBox.setPadding(new Insets(20));
 
         this.allerAuMois(moisCourant);
-        hBox.getChildren().addAll(titleLabel,premierMoisButton, precedentMoisButton, suivantMoisButton, dernierMoisButton);
-        this.getChildren().add(hBox);
+        hBox.getChildren().addAll(titleLabel, spacer,premierMoisButton, precedentMoisButton, suivantMoisButton, dernierMoisButton);
+        this.getChildren().addAll(vboxCalendrier, hBox);
     }
 
     void allerAuMois(int parMois) {

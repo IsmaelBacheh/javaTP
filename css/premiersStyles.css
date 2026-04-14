@@ -1,0 +1,19 @@
+#opaque {
+    -fx-background-color: white;
+}
+
+.toggle-button {
+    -fx-background-color: white;
+}
+
+.toggle-button:selected {
+    -fx-background-color: gainsboro;
+}
+
+#dateOutOfMonth {
+    -fx-text-fill: gray;
+}
+
+#today {
+    -fx-text-fill: coral;
+}

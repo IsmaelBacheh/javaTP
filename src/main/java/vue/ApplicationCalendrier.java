@@ -14,14 +14,12 @@ public class ApplicationCalendrier extends Application {
     public void start(Stage stage)   {
         VBox root = new VBoxRoot();
 
-        Scene scene = new Scene (root, 600, 400);
+        Scene scene = new Scene (root, 250, 350);
+        File css = new File("css"+File.separator+"premiersStyles.css");
+        scene.getStylesheets().add(css.toURI().toString());
         stage.setScene(scene);
         stage.setTitle ("Hello JavaFX");
         stage.show();
-
-        //File css = new File("css"+File.separator+"premiersStyles.css");
-        //scene.getStylesheets().add(css.toURI().toString());
-
     }
 
     public static void main(String[] args) {
