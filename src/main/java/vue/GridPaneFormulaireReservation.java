@@ -3,6 +3,7 @@ package vue;
 import javafx.geometry.Orientation;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.application.Platform;
 import javafx.scene.layout.HBox;
 
 import java.util.ArrayList;
@@ -22,18 +23,28 @@ public class GridPaneFormulaireReservation extends GridPane {
         TextField txtCours = new TextField();
         this.add(lblCours, 0, 2);
         this.add(txtCours, 1, 2, 5, 1);
+        Platform.runLater(()-> txtCours.requestFocus());
 
         // Affichage des Niveau ------------------------------------------------------
+        ToggleGroup levelGroup = new ToggleGroup();
 
         Label lblNiveau = new Label("Niveau");
         this.add(lblNiveau, 0, 3);
+
         RadioButton rbDebutant = new RadioButton("débutant");
+        rbDebutant.setToggleGroup(levelGroup);
         this.add(rbDebutant, 1, 3,2,1);
+
         RadioButton rbMoyen = new RadioButton("moyen");
+        rbMoyen.setToggleGroup(levelGroup);
         this.add(rbMoyen, 3, 3,2,1);
+
         RadioButton rbAvance = new RadioButton("avancé");
+        rbAvance.setToggleGroup(levelGroup);
         this.add(rbAvance, 1, 4,2,1);
+
         RadioButton rbExpert = new RadioButton("expert");
+        rbExpert.setToggleGroup(levelGroup);
         this.add(rbExpert, 3, 4,2,1);
 
         // Affichage des Horaires --------------------------------------------------
@@ -44,7 +55,7 @@ public class GridPaneFormulaireReservation extends GridPane {
         Label lblDe = new Label("de");
         this.add(lblDe, 1, 5);
         ComboBox<String> heureDebut = new ComboBox<>();
-        for (int i = 0; i <= 24; i++) {
+        for (int i = 0; i <= 23; i++) {
             heureDebut.getItems().add(String.format("%02d", i));
         }
         heureDebut.setValue("07");
@@ -53,7 +64,7 @@ public class GridPaneFormulaireReservation extends GridPane {
         this.add(lblhDebut, 3, 5);
 
         ComboBox<String> minDebut = new ComboBox<>();
-        for (int i = 0; i < 60; i++) {
+        for (int i = 0; i < 60; i += 15) {
             minDebut.getItems().add(String.format("%02d", i));
         }
         minDebut.setValue("00");
@@ -65,7 +76,7 @@ public class GridPaneFormulaireReservation extends GridPane {
         this.add(lblA, 1, 6);
 
         ComboBox<String> heureFin = new ComboBox<>();
-        for (int i = 0; i <= 24; i++) {
+        for (int i = 0; i <= 23; i++) {
             heureFin.getItems().add(String.format("%02d", i));
         }
         heureFin.setValue("08");
@@ -74,7 +85,7 @@ public class GridPaneFormulaireReservation extends GridPane {
         this.add(lblhFin, 3, 6);
 
         ComboBox<String> minFin = new ComboBox<>();
-        for (int i = 0; i < 60; i++) {
+        for (int i = 0; i < 60; i += 15) {
             minFin.getItems().add(String.format("%02d", i));
         }
         minFin.setValue("00");
