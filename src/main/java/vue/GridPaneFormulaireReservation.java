@@ -19,8 +19,9 @@ public class GridPaneFormulaireReservation extends GridPane {
         Separator sep = new Separator(Orientation.HORIZONTAL);
         this.add(sep, 0, 1, 6, 1);
 
-        Label lblCours = new Label("Cours");
+        Label lblCours = new Label("_Cours");
         TextField txtCours = new TextField();
+        lblCours.setMnemonicParsing(true);
         this.add(lblCours, 0, 2);
         this.add(txtCours, 1, 2, 5, 1);
         Platform.runLater(()-> txtCours.requestFocus());
@@ -31,20 +32,24 @@ public class GridPaneFormulaireReservation extends GridPane {
         Label lblNiveau = new Label("Niveau");
         this.add(lblNiveau, 0, 3);
 
-        RadioButton rbDebutant = new RadioButton("débutant");
+        RadioButton rbDebutant = new RadioButton("_débutant");
         rbDebutant.setToggleGroup(levelGroup);
+        rbDebutant.setMnemonicParsing(true);
         this.add(rbDebutant, 1, 3,2,1);
 
-        RadioButton rbMoyen = new RadioButton("moyen");
+        RadioButton rbMoyen = new RadioButton("_moyen");
         rbMoyen.setToggleGroup(levelGroup);
+        rbMoyen.setMnemonicParsing(true);
         this.add(rbMoyen, 3, 3,2,1);
 
-        RadioButton rbAvance = new RadioButton("avancé");
+        RadioButton rbAvance = new RadioButton("_avancé");
         rbAvance.setToggleGroup(levelGroup);
+        rbAvance.setMnemonicParsing(true);
         this.add(rbAvance, 1, 4,2,1);
 
-        RadioButton rbExpert = new RadioButton("expert");
+        RadioButton rbExpert = new RadioButton("_expert");
         rbExpert.setToggleGroup(levelGroup);
+        rbExpert.setMnemonicParsing(true);
         this.add(rbExpert, 3, 4,2,1);
 
         // Affichage des Horaires --------------------------------------------------
@@ -97,11 +102,13 @@ public class GridPaneFormulaireReservation extends GridPane {
         Separator sep2 = new Separator(Orientation.HORIZONTAL);
         this.add(sep2, 0, 7, 6, 1);
 
-        Button btnAnnuler = new Button("Annuler");
-        Button btnEnregistrer = new Button("Enregistrer");
+        Button btnAnnuler = new Button("_Annuler");
+        Button btnEnregistrer = new Button("_Enregistrer");
+
+        btnAnnuler.setMnemonicParsing(true);
+        btnEnregistrer.setMnemonicParsing(true);
 
         this.add(btnAnnuler, 2, 8,2,1);
         this.add(btnEnregistrer, 3, 8,3,1);
-        // this.setGridLinesVisible(true);
     }
 }
