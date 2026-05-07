@@ -1,5 +1,7 @@
 package vue;
 
+import controleur.Controleur;
+import javafx.event.ActionEvent;
 import javafx.geometry.Orientation;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
@@ -10,6 +12,7 @@ import java.util.ArrayList;
 
 public class GridPaneFormulaireReservation extends GridPane {
     public GridPaneFormulaireReservation() {
+        Controleur controleur = new Controleur();
         this.setHgap(10);
         this.setVgap(10);
 
@@ -104,6 +107,8 @@ public class GridPaneFormulaireReservation extends GridPane {
 
         Button btnAnnuler = new Button("_Annuler");
         Button btnEnregistrer = new Button("_Enregistrer");
+
+        btnEnregistrer.addEventHandler(ActionEvent.ACTION, controleur);
 
         btnAnnuler.setMnemonicParsing(true);
         btnEnregistrer.setMnemonicParsing(true);

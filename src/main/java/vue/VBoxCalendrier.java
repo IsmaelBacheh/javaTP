@@ -1,6 +1,8 @@
 package vue;
 
+import controleur.Controleur;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -21,6 +23,7 @@ public class VBoxCalendrier extends VBox {
     int moisCourant;
 
     public VBoxCalendrier(){
+        Controleur controleur = new Controleur();
         DateCalendrier aujourdhui = new DateCalendrier();
         int mois = aujourdhui.getMois();
         annee = aujourdhui.getAnnee();
@@ -89,6 +92,7 @@ public class VBoxCalendrier extends VBox {
                         System.out.println(dateButton.getUserData());
                     }
                 });
+                dateButton.addEventHandler(ActionEvent.ACTION, controleur);
 
                 if (date.getMois() != monthIndex) {
                     dateButton.setId("dateOutOfMonth");
