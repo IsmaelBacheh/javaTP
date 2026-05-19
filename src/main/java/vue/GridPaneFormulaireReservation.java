@@ -7,17 +7,21 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.application.Platform;
 import javafx.scene.layout.HBox;
+import modele.DateCalendrier;
 
 import java.util.ArrayList;
 
 public class GridPaneFormulaireReservation extends GridPane {
+    DateCalendrier date;
+    Label dateLabel;
     public GridPaneFormulaireReservation() {
-        Controleur controleur = new Controleur();
+
+        date = new DateCalendrier();
         this.setHgap(10);
         this.setVgap(10);
 
-        Label dateFormulaire = new Label("Date");
-        this.add(dateFormulaire, 0, 0);
+        dateLabel = new Label(date.toString());
+        this.add(dateLabel, 0, 0);
 
         Separator sep = new Separator(Orientation.HORIZONTAL);
         this.add(sep, 0, 1, 6, 1);
@@ -108,12 +112,15 @@ public class GridPaneFormulaireReservation extends GridPane {
         Button btnAnnuler = new Button("_Annuler");
         Button btnEnregistrer = new Button("_Enregistrer");
 
-        btnEnregistrer.addEventHandler(ActionEvent.ACTION, controleur);
+        btnEnregistrer.addEventHandler(ActionEvent.ACTION, HBoxRoot.getControleur());
 
         btnAnnuler.setMnemonicParsing(true);
         btnEnregistrer.setMnemonicParsing(true);
 
         this.add(btnAnnuler, 2, 8,2,1);
         this.add(btnEnregistrer, 3, 8,3,1);
+    }
+
+    public void update(DateCalendrier date) {
     }
 }

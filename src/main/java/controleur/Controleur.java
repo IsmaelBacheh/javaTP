@@ -6,6 +6,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.GridPane;
+import modele.DateCalendrier;
 import modele.PlanningCollections;
 import vue.GridPaneFormulaireReservation;
 import vue.HBoxRoot;
@@ -18,7 +19,8 @@ public class Controleur implements EventHandler {
 
         //la source de event est un ToggleButton du calendrier
         if (event.getSource() instanceof ToggleButton) {
-            ToggleButton toggleButton = (ToggleButton) event.getSource();
+            DateCalendrier date = (DateCalendrier)((ToggleButton) event.getSource()).getUserData();
+            reservationPane.update(date);
         }
 
         // la source de event est le bouton "Enregistrer" du formullaire de reservation

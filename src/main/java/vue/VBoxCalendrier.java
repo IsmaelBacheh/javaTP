@@ -94,6 +94,8 @@ public class VBoxCalendrier extends VBox {
                 });
                 dateButton.addEventHandler(ActionEvent.ACTION, controleur);
 
+                dateButton.addEventHandler(ActionEvent.ACTION,HBoxRoot.getControleur());
+
                 if (date.getMois() != monthIndex) {
                     dateButton.setId("dateOutOfMonth");
                 }
