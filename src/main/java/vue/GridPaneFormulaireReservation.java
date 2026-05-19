@@ -1,40 +1,47 @@
 package vue;
 
-import controleur.Controleur;
 import javafx.event.ActionEvent;
 import javafx.geometry.Orientation;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.application.Platform;
-import javafx.scene.layout.HBox;
 import modele.DateCalendrier;
 
-import java.util.ArrayList;
-
 public class GridPaneFormulaireReservation extends GridPane {
-    DateCalendrier date;
+    DateCalendrier dateChoisi;
     Label dateLabel;
+    private TextField txtCours;
+    private ToggleGroup levelGroup;
+
+    public TextField getTxtCours() {
+        return txtCours;
+    }
+
+    public ToggleGroup getLevelGroup() {
+        return levelGroup;
+    }
+
     public GridPaneFormulaireReservation() {
 
-        date = new DateCalendrier();
+        dateChoisi = new DateCalendrier();
         this.setHgap(10);
         this.setVgap(10);
 
-        dateLabel = new Label(date.toString());
+        dateLabel = new Label(dateChoisi.toString());
         this.add(dateLabel, 0, 0);
 
         Separator sep = new Separator(Orientation.HORIZONTAL);
         this.add(sep, 0, 1, 6, 1);
 
         Label lblCours = new Label("_Cours");
-        TextField txtCours = new TextField();
+        txtCours = new TextField();
         lblCours.setMnemonicParsing(true);
         this.add(lblCours, 0, 2);
         this.add(txtCours, 1, 2, 5, 1);
         Platform.runLater(()-> txtCours.requestFocus());
 
         // Affichage des Niveau ------------------------------------------------------
-        ToggleGroup levelGroup = new ToggleGroup();
+        levelGroup = new ToggleGroup();
 
         Label lblNiveau = new Label("Niveau");
         this.add(lblNiveau, 0, 3);
@@ -42,22 +49,27 @@ public class GridPaneFormulaireReservation extends GridPane {
         RadioButton rbDebutant = new RadioButton("_débutant");
         rbDebutant.setToggleGroup(levelGroup);
         rbDebutant.setMnemonicParsing(true);
+        rbDebutant.setUserData("débutant");
         this.add(rbDebutant, 1, 3,2,1);
 
         RadioButton rbMoyen = new RadioButton("_moyen");
         rbMoyen.setToggleGroup(levelGroup);
         rbMoyen.setMnemonicParsing(true);
+        rbMoyen.setUserData("moyen");
         this.add(rbMoyen, 3, 3,2,1);
 
         RadioButton rbAvance = new RadioButton("_avancé");
         rbAvance.setToggleGroup(levelGroup);
         rbAvance.setMnemonicParsing(true);
+        rbAvance.setUserData("avancé");
         this.add(rbAvance, 1, 4,2,1);
 
         RadioButton rbExpert = new RadioButton("_expert");
         rbExpert.setToggleGroup(levelGroup);
         rbExpert.setMnemonicParsing(true);
+        rbExpert.setUserData("expert");
         this.add(rbExpert, 3, 4,2,1);
+
 
         // Affichage des Horaires --------------------------------------------------
 
@@ -112,7 +124,7 @@ public class GridPaneFormulaireReservation extends GridPane {
         Button btnAnnuler = new Button("_Annuler");
         Button btnEnregistrer = new Button("_Enregistrer");
 
-        btnEnregistrer.addEventHandler(ActionEvent.ACTION, HBoxRoot.getControleur());
+        btnEnregistrer.setOnAction(HBoxRoot.getControleur());
 
         btnAnnuler.setMnemonicParsing(true);
         btnEnregistrer.setMnemonicParsing(true);
@@ -122,5 +134,7 @@ public class GridPaneFormulaireReservation extends GridPane {
     }
 
     public void update(DateCalendrier date) {
+        dateLabel.setText(date.toString());
+        this.dateChoisi = date;
     }
 }
